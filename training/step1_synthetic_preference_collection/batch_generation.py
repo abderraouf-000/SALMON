@@ -19,17 +19,17 @@ from llama_dromedary import Llama
 def main(
     ckpt_dir: str,
     tokenizer_path: str,
-    temperature: float = 1.0,
+    temperature: float = 1.0, # --temperature 0.7 \
     top_p: float = 1.0,
-    max_seq_len: int = 512,
+    max_seq_len: int = 512, #--max_seq_len 768 \
     max_batch_size: int = 32,
     max_shared_seq_len: int = 512,
-    generate_max_len: int = 128,
+    generate_max_len: int = 128,  # --generate_max_len 768
     group_rank: int = -1,
     group_size: int = -1,
-    input_file: str = None,
-    output_file: str = None,
-    meta_prompt_file: str = None,
+    input_file: str = None, # --input_file "$DATA_DIR/oasst1_prompts.json" \
+    output_file: str = None, # --output_file "$DATA_DIR/oasst1_dromedary2_sft_response0.json" \
+    meta_prompt_file: str = None, #--meta_prompt_file "../../prompts/synthetic_inference_prompts/dromedary_inference_prompt.txt"
     prompt_style: str = "dromedary",
     seed: Optional[int] = None,
 ):
@@ -49,7 +49,7 @@ def main(
     else:
         raise ValueError(f"Unknown prompt style: {prompt_style}")
 
-    with open(meta_prompt_file, "r") as f:
+    with open(meta_prompt_file, "r") as f: 
         meta_prompt = f.read().strip()
 
     generator = Llama.build(
